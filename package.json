@@ -1,0 +1,32 @@
+{
+  "name": "bd_dawa",
+  "version": "1.0.0",
+  "description": "Une base de données contenant une description d'une grande partie des sahabas. Cette base est très utile pour retrouver facilement des sahabas grace à ses nombreux filtres.",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.10.4",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "keywords": [
+    "base",
+    "de",
+    "données",
+    "sahabas",
+    "compagnons",
+    "prophète",
+    "dawa",
+    "brotherhood",
+    "of",
+    "light"
+  ],
+  "author": "Imad Laouani",
+  "license": "ISC"
+}

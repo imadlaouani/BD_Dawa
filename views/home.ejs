@@ -1,0 +1,18 @@
+<html lang="fr">
+  <%- include ("./partials/header.ejs") %>
+
+  <body>
+    <%- include ("./partials/nav.ejs") %>
+
+    <div>
+      <h2>Tous les Sahabas</h2>
+
+      <% if (sahabas.length > 0) { %> <% sahabas.forEach(sahaba => { %>
+      <h3><%= sahaba.name %></h3>
+      <% }) %> <% } else { %>
+      <p>Il n'y a pas de sahabas pour le moment...</p>
+      <% } %>
+    </div>
+    <%- include ("./partials/footer.ejs") %>
+  </body>
+</html>
