@@ -7,7 +7,7 @@ const Sahaba = require("../models/sahaba");
 
 // get all sahaba
 router.get("/", (req, res, next) => {
-  Sahaba.find()
+  Sahaba.find(req.query)
     .exec()
     .then((docs) => {
       const response = {

@@ -81,7 +81,6 @@ const sahabaSchema = mongoose.Schema({
     enum: [
       "Aucune",
       "Expédition de Waddan et d'Abwa",
-      ,
       "Expédition de Bowât",
       "Expédition d'Uchayra",
       "Première expédition de Badr",
@@ -113,6 +112,39 @@ const sahabaSchema = mongoose.Schema({
       "Expédition de Tabuk",
     ],
   },
+  métier: {
+    type: String,
+    enum: ["Commerçants", "Agriculteur-éleveur", "Calife", "Fonctionnaire"],
+  },
+
+  émigration: {
+    type: String,
+    enum: [
+      "1ère émigration en Abyssinie",
+      "2e émigration en Abyssinie",
+      "Médine",
+    ],
+  },
+  serment: {
+    type: String,
+    enum: [
+      "Aucun",
+      "Le premier d’Al ‘Aqaba",
+      "Le deuxième d’Al ‘Aqaba",
+      "Le pacte d’al hudaybiya",
+      "Bay’atu ridwan",
+    ],
+  },
+  catégorie: {
+    type: String,
+    enum: ["Muhajjirs", "Ansars", "Autre"],
+  },
+  bienfait: {
+    type: String,
+    enum: ["Une invocation", "La promesse du paradis", "Autre"],
+  },
+  verset: { type: Boolean },
+  résumé: { type: String },
 });
 
 module.exports = mongoose.model("Sahaba", sahabaSchema);
