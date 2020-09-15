@@ -1,14 +1,14 @@
 const express = require("express");
 const mongoose = require("mongoose");
-
-// we import the packages
-const app = express();
 const morgan = require("morgan");
 const cors = require("cors");
+const bodyParser = require("body-parser");
+
+const app = express();
 
 // import routes
 const sahabaRoutes = require("./api/routes/sahabas");
-const bodyParser = require("body-parser");
+const userRoutes = require("./api/routes/users");
 
 // Connection to the database
 const dbURI =
@@ -17,7 +17,11 @@ const dbURI =
   "@cluster0.kisga.mongodb.net/DB_Sahabas?retryWrites=true&w=majority";
 
 mongoose
-  .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(dbURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+  })
   .then((result) => console.log("connection to db"))
   .catch((err) => console.log(err));
 // view engine = ejs
@@ -27,21 +31,10 @@ app.use(morgan("dev"));
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-/*
-app.use((req, res, next) => {
-  res.getHeader("Access-Control-Allow-Header", "*");
-  res.header(
-    "Acces-Control-Allow-Headers",
-    "Origin,X-Requested-With, Content-Type, Accept, Authorization"
-  );
-  if (req.method == "OPTION") {
-    res.header("Acces-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
-    return res.status(200).json({});
-    next();
-  }
-});*/
+
 // Routes which handle requests
 app.use("/sahabas", sahabaRoutes);
+app.use("/users", userRoutes);
 
 // Handling errors
 

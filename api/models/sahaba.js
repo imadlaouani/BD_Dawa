@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 
 const sahabaSchema = mongoose.Schema({
-  _id: mongoose.Schema.Types.ObjectId,
   nom: { type: String, required: true },
   prénom: { type: String, required: true },
   lieu_de_naissance: {

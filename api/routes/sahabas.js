@@ -2,36 +2,20 @@ const express = require("express");
 const { Router } = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
+const multer = require("multer");
+const upload = multer({ dest: "uploads" });
 
 const Sahaba = require("../models/sahaba");
+const chekAuth = require("../middleware/check-auth");
+const checkAuth = require("../middleware/check-auth");
 
+const SahabaController = require("../controllers/sahabaController");
 // get all sahaba
-router.get("/", (req, res, next) => {
-  Sahaba.find(req.query)
-    .exec()
-    .then((docs) => {
-      const response = {
-        count: docs.length,
-        sahabas: docs,
-      };
-      res.status(200).json(response);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json({
-        error: err,
-      });
-    });
-});
+router.get("/", SahabaController.sahaba_get);
 
 // Create a sahaba
-router.post("/", (req, res, next) => {
-  const sahaba = new Sahaba({
-    _id: new mongoose.Types.ObjectId(),
-    nom: req.body.nom,
-    prénom: req.body.prénom,
-    lieu_de_naissance: req.body.lieu_de_naissance,
-  });
+router.post("/", upload.single("image"), checkAuth, (req, res, next) => {
+  const sahaba = new Sahaba(req.body);
   sahaba
     .save()
     .then((result) => {
@@ -80,7 +64,7 @@ router.get("/:id", (req, res, next) => {
 //Update, modify a sahaba
 router.patch("/:id", (req, res, next) => {
   const id = req.params.id;
-  // we make a copy in case in we don't want to update all properties but only one or 2
+  // we make a copy
   const updateOps = {};
   for (const ops of req.body) {
     updateOps[ops.propName] = ops.value;
